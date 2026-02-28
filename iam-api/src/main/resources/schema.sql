@@ -67,6 +67,36 @@ CREATE TABLE IF NOT EXISTS oauth2_registered_client
 );
 
 -- ---------------------------------------------------------------------------
+-- CLIENT 4 — Swagger UI client for testing the /swagger-ui/oauth2-redirect.html flow
+--   client_id     : echo-spa-client
+--   client_secret : none (public client for Swagger UI)
+--   PKCE          : required  (require-proof-key = true)
+--   grant types   : authorization_code
+--   redirect_uri  : http://localhost:9000/swagger-ui/oauth2-redirect.html
+-- ---------------------------------------------------------------------------
+INSERT IGNORE INTO oauth2_registered_client (
+    id, client_id, client_id_issued_at,
+    client_secret, client_secret_expires_at,
+    client_name, client_authentication_methods, authorization_grant_types,
+    redirect_uris, post_logout_redirect_uris, scopes,
+    client_settings, token_settings
+) VALUES (
+    'swagger-ui-client-id',
+    'echo-spa-client',
+    NOW(),
+    NULL,
+    NULL,
+    'Swagger UI Client',
+    'none',
+    'authorization_code',
+    'http://localhost:9000/swagger-ui/oauth2-redirect.html',
+    NULL,
+    'openid,profile,read',
+    '{"@class":"java.util.Collections$UnmodifiableMap","settings.client.require-proof-key":true,"settings.client.require-authorization-consent":true}',
+    '{"@class":"java.util.Collections$UnmodifiableMap","settings.token.reuse-refresh-tokens":true,"settings.token.access-token-time-to-live":["java.time.Duration",300.000000000],"settings.token.refresh-token-time-to-live":["java.time.Duration",3600.000000000],"settings.token.authorization-code-time-to-live":["java.time.Duration",300.000000000],"settings.token.device-code-time-to-live":["java.time.Duration",300.000000000]}'
+);
+
+-- ---------------------------------------------------------------------------
 -- CLIENT 1 — SPA / Public client  (PKCE REQUIRED, no client_secret)
 --   client_id     : spa-client
 --   client_secret : none  (public client)

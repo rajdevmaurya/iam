@@ -49,6 +49,11 @@ springdoc:
     urls:
       - url: /openapi.yaml
         name: Echo IAM API
+    oauth:
+      client-id: echo-spa-client
+      client-secret: ""
+      use-pkce-with-authorization-code-grant: true
+      scope-separator: " "
 
 logging:
   level:

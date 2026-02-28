@@ -8,13 +8,13 @@ info:
 servers:
   - url: http://localhost:8080/api/v2
     description: OIDC Http journey URL
-
+    
 security:
   - BearerAuth: []
   - OAuth2PKCE:
-      - openid
-      - profile
-      - read
+    - openid
+    - profile
+    - read
 
 paths:
 
