@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Echo Healthcare</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div>
+        <div th:replace="~{fragments :: navbar}"></div>
+        <div class="main">
+            <h1>Welcome to Echo Healthcare</h1>
+            <div class="text">
+                <p th:text="${logout}"></p>
+            </div>
+        </div>
+        <div th:replace="~{fragments :: footer}"></div>
+    </div>
+</body>
+</html>

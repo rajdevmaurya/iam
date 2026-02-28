@@ -1,0 +1,187 @@
+/* ============================================================
+   Echo Healthcare Client — Stylesheet
+   Brand colour: #005a9e (Echo Healthcare blue)
+   ============================================================ */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f0f2f5;
+    color: #333;
+}
+
+h1 {
+    color: #005a9e;
+}
+
+h2 {
+    padding: 10px 0;
+    color: #333;
+}
+
+h3 {
+    color: #005a9e;
+}
+
+/* ---- Layout ---- */
+
+.main {
+    margin: 25px;
+}
+
+.text {
+    padding: 25px;
+}
+
+.center {
+    text-align: center;
+}
+
+.tab {
+    display: inline-block;
+    margin-left: 60px;
+}
+
+/* ---- User form ---- */
+
+.userform {
+    padding: 5px 0;
+}
+
+.user-link {
+    display: inline-block;
+    width: 300px;
+}
+
+/* ---- Action buttons ---- */
+
+.update {
+    display: inline-block;
+    margin: 0;
+    padding: 5px 12px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #005a9e;
+    border-radius: 3px;
+    font-size: 0.875rem;
+}
+
+.update:hover {
+    background-color: #004882;
+}
+
+.delete {
+    display: inline-block;
+    margin: 0 0 0 6px;
+    padding: 5px 12px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #c0392b;
+    border-radius: 3px;
+    font-size: 0.875rem;
+}
+
+.delete:hover {
+    background-color: #962d22;
+}
+
+/* ---- Error banner ---- */
+
+.error {
+    background: #ffe0e0;
+    color: #a00;
+    border: 1px solid #f5a5a5;
+    border-radius: 4px;
+    padding: 0.5rem 0.8rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+/* ---- Navbar ---- */
+
+.navbar {
+    width: 100%;
+    padding: 0 20px 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #005a9e;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-icon {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.logo {
+    display: inline-block;
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: 600;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-item a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 16px 15px;
+    color: #d6e8f7;
+    font-size: 0.95rem;
+}
+
+.nav-item:hover {
+    background-color: #004882;
+}
+
+.nav-item:hover a {
+    color: #fff;
+}
+
+/* Logout button styled as a nav link */
+input[type=submit].link {
+    border: none;
+    background: none;
+    color: #d6e8f7;
+    text-decoration: none;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+input[type=submit].link:hover {
+    color: #fff;
+}
+
+form.link {
+    display: inline-block;
+    padding: 16px 15px;
+}
+
+/* ---- Footer ---- */
+
+.footer {
+    margin-top: 40px;
+    padding: 16px;
+    text-align: center;
+    background-color: #005a9e;
+    color: #d6e8f7;
+    font-size: 0.85rem;
+}

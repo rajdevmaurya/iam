@@ -1,0 +1,244 @@
+openapi: 3.1.0
+
+info:
+  title: Echo OIDC LOGIN
+  description: Echo OIDC Login For Echohealthcare
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080/api/v2
+    description: OIDC Http journey URL
+
+paths:
+
+  /login/direct/{oidcapp}/authorize:
+    post:
+      summary: Fetch authorization token
+      operationId: authorize
+      description: Fetch authorization parameters required to start a secure OIDC session.
+      parameters:
+        - name: oidcapp
+          in: path
+          required: true
+          schema:
+            type: string
+          description: OIDC App name defined in Transmit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizeRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizeResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/anonymous_invoke:
+    post:
+      summary: Invoke authz_controller journey
+      operationId: invoke
+      description: Performs userless journey invocation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnonymousRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnonymousResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnErrorResponse'
+
+  /auth/login:
+    post:
+      summary: Login Journey
+      operationId: login
+      description: Validates user credentials and display token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginErrorResponse'
+
+components:
+
+  schemas:
+
+    AuthorizeRequest:
+      type: object
+      required:
+        - app_id
+        - state
+        - nonce
+        - code_challenge
+        - redirect_uri
+      properties:
+        app_id:
+          type: string
+        state:
+          type: string
+        nonce:
+          type: string
+        code_challenge:
+          type: string
+        redirect_uri:
+          type: string
+
+    AuthorizeResponse:
+      type: object
+      required:
+        - error_code
+        - token
+      properties:
+        error_code:
+          type: string
+        oidc_auth_params:
+          type: object
+        accountProtectionClientId:
+          type: string
+        oidcSessions:
+          type: string
+        token:
+          type: string
+        completeUri:
+          type: string
+        pid:
+          type: string
+        aid:
+          type: string
+        sid:
+          type: string
+
+    AnonymousRequest:
+      type: object
+      required:
+        - headers
+        - data
+        - policy_request_id
+        - session_id
+        - authorization_token
+        - app_id
+      properties:
+        headers:
+          type: array
+          items:
+            type: string
+        data:
+          type: object
+        policy_request_id:
+          type: string
+        session_id:
+          type: string
+        authorization_token:
+          type: string
+        app_id:
+          type: string
+
+    AnonymousResponse:
+      type: object
+      required:
+        - error_code
+        - error_message
+      properties:
+        error_code:
+          type: string
+        error_message:
+          type: string
+        data:
+          type: object
+        redirect_uri:
+          type: string
+        exchange_uri:
+          type: string
+
+    ErrorResponse:
+      type: object
+      required:
+        - error_code
+        - error_description
+      properties:
+        error_code:
+          type: string
+        error_description:
+          type: string
+
+    AnErrorResponse:
+      type: object
+      required:
+        - error_code
+        - error_message
+        - status
+        - display_message
+      properties:
+        error_code:
+          type: string
+        error_message:
+          type: string
+        data:
+          type: object
+        status:
+          type: string
+        display_message:
+          type: string
+
+    LoginRequest:
+      type: object
+      properties:
+        contractId:
+          type: string
+        password:
+          type: string
+        displayToken:
+          type: string
+
+    LoginResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+
+    LoginErrorResponse:
+      type: object
+      required:
+        - error_code
+        - error_description
+      properties:
+        error_code:
+          type: string
+        error_description:
+          type: string

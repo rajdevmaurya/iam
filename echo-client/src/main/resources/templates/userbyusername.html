@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>User Detail | Echo Healthcare</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div th:replace="~{fragments :: navbar}"></div>
+    <div class="main">
+        <h1>User Detail</h1>
+    </div>
+    <div class="text">
+        <h2>User</h2>
+        <div>
+            <h3>Username: <span th:text="${user.username}"></span></h3>
+            <p>Password: <span th:text="${user.password}"></span></p>
+            <p>Enabled: <span th:text="${user.enabled}"></span></p>
+            <div>Roles:
+                <div th:each="role: ${user.authority}">
+                    <p><span class="tab"><span th:text="${role}"></span></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>

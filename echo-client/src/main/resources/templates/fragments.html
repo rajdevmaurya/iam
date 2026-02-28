@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <title>Echo Healthcare</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<!-- ===== Shared navbar fragment ===== -->
+<div th:fragment="navbar">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <span class="logo-icon">&#43;</span>
+            <h1 class="logo">Echo Healthcare</h1>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-item"><a href="/">Home</a></li>
+            <li sec:authorize="isAuthenticated()" class="nav-item"><a href="/user">Users</a></li>
+            <li sec:authorize="isAuthenticated()" class="nav-item"><a href="/createuser">New User</a></li>
+            <li sec:authorize="isAuthenticated()" class="nav-item"><a href="/authority">Authorities</a></li>
+            <li sec:authorize="!isAuthenticated()" class="nav-item"><a href="/oauth2/authorization/client">Login</a></li>
+            <li sec:authorize="isAuthenticated()" class="nav-item">
+                <form class="link" th:action="@{/logout}" method="post">
+                    <input class="link" type="submit" value="Logout"/>
+                </form>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<!-- ===== Shared footer fragment ===== -->
+<div th:fragment="footer">
+    <footer class="footer">
+        <p>&#169; Echo Healthcare 2025. All rights reserved.</p>
+    </footer>
+</div>
+
+</body>
+</html>

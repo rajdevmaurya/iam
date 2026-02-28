@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>User Form | Echo Healthcare</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div th:replace="~{fragments :: navbar}"></div>
+    <div class="main">
+        <h1>User Form</h1>
+    </div>
+    <div class="text">
+        <h2>Create / Edit User</h2>
+        <div class="error" th:if="${error}">Invalid username and/or password.</div>
+        <form class="main" action="#" th:action="@{/user}" th:object="${user}" th:method="${method}">
+            <p class="userform"><label for="username">Username: </label><input id="username" type="text" th:field="*{username}" placeholder="Username" required autofocus /></p>
+            <p class="userform"><label for="password">Password: </label><input id="password" type="text" th:field="*{password}" placeholder="Password" required /></p>
+            <p class="userform"><label for="enabled">Enabled: </label><input id="enabled" type="checkbox" th:field="*{enabled}" /></p>
+            <p class="userform"><label for="roles">Roles: </label></p>
+            <p class="userform" th:each="role : ${allRoles}">
+                <input class="tab" id="roles" type="checkbox" name="roles" th:text="${role}" th:value="${role}" th:field="*{authority}" />
+            </p>
+            <p class="userform">
+                <input type="submit" value="Submit" />
+                <input type="reset" value="Reset" />
+            </p>
+        </form>
+    </div>
+    <div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>

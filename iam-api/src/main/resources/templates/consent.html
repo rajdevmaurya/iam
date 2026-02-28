@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Echo Healthcare — Consent</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script>
+        function cancelConsent() {
+            document.consent_form.reset();
+            document.consent_form.submit();
+        }
+    </script>
+</head>
+<body>
+    <div class="consent-page">
+        <div class="consent">
+
+            <h1>Echo Healthcare</h1>
+
+            <p>
+                The application <span class="consent_span" th:text="${clientId}"></span>
+                is requesting access to your account
+                <span class="consent_span" th:text="${principalName}"></span>.
+            </p>
+
+            <p>Please review the requested permissions and approve if you consent.</p>
+
+            <form name="consent_form" method="post" th:action="@{/oauth2/authorize}">
+                <input type="hidden" name="client_id" th:value="${clientId}">
+                <input type="hidden" name="state"     th:value="${state}">
+
+                <!-- Scopes requiring new approval -->
+                <div th:each="scope: ${scopes}" class="scope-row">
+                    <input class="form-check-input" type="checkbox"
+                           name="scope" th:value="${scope.scope}" th:id="${scope.scope}">
+                    <label th:for="${scope.scope}" th:text="${scope.scope}"></label>
+                    <p class="scope-desc" th:text="${scope.description}"></p>
+                </div>
+
+                <!-- Previously approved scopes (read-only) -->
+                <div th:if="${not #lists.isEmpty(previouslyApprovedScopes)}">
+                    <p>You have already granted the following permissions:</p>
+                    <div th:each="scope: ${previouslyApprovedScopes}" class="scope-row">
+                        <input class="form-check-input" type="checkbox"
+                               th:id="${scope.scope}" disabled checked>
+                        <label th:for="${scope.scope}" th:text="${scope.scope}"></label>
+                        <p class="scope-desc" th:text="${scope.description}"></p>
+                    </div>
+                </div>
+
+                <div class="consent-actions">
+                    <button class="button" type="submit" id="submit-consent">Submit Consent</button>
+                    <button class="button secondary" type="button"
+                            id="cancel-consent" onclick="cancelConsent();">Cancel</button>
+                </div>
+            </form>
+
+            <p class="consent-note">
+                <small>
+                    Your consent is required to grant access.<br>
+                    If you click Cancel, no information will be shared with the application.
+                </small>
+            </p>
+
+        </div>
+    </div>
+</body>
+</html>

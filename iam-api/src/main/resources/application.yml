@@ -1,0 +1,57 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: iam-api
+  threads:
+    virtual:
+      enabled: true
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/iamdb?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # Run schema.sql on every startup (CREATE TABLE IF NOT EXISTS guards idempotency)
+  sql:
+    init:
+      mode: always
+      platform: mysql
+
+  jpa:
+    hibernate:
+      # Schema is managed by schema.sql — Hibernate only validates
+      ddl-auto: validate
+    show-sql: false
+    open-in-view: false
+
+# RSA private/public key encryption passphrase (override in production via env vars)
+jwt:
+  encryptor:
+    password: password
+    salt: 626F6F746966756C
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    oauth2-redirect-url: /swagger-ui/oauth2-redirect.html
+    urls:
+      - url: /openapi.yaml
+        name: Echo IAM API
+
+logging:
+  level:
+    "[org.springframework.security]": INFO
+    "[org.springframework.security.oauth2]": DEBUG
+    "[com.echohealthcare.iam]": DEBUG

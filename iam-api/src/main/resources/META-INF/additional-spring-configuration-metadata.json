@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "jwt.encryptor.password",
+      "type": "java.lang.String",
+      "description": "Passphrase used by Spring Security TextEncryptor to encrypt RSA key pairs stored in the database."
+    },
+    {
+      "name": "jwt.encryptor.salt",
+      "type": "java.lang.String",
+      "description": "Hex-encoded salt (8 bytes / 16 hex chars) used by Spring Security TextEncryptor alongside the password."
+    }
+  ]
+}

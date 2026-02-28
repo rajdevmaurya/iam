@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Authorities | Echo Healthcare</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div>
+        <div th:replace="~{fragments :: navbar}"></div>
+        <div class="main">
+            <h1>Authority Management</h1>
+        </div>
+        <div class="text">
+            <h2>Authorities</h2>
+            <div th:each="authority : ${authorities}">
+                <h3>Username: <span th:text="${authority.username}"></span></h3>
+                <p class="tab">Authority: <span th:text="${authority.authority}"></span></p>
+            </div>
+        </div>
+        <div th:replace="~{fragments :: footer}"></div>
+    </div>
+</body>
+</html>
